@@ -26,7 +26,7 @@ const requestHeadler = (req, res) => {
     });
     return req.on("end", () => {
       const parsedBody = Buffer.concat(body).toString();
-      const message = parsedBody.split("=")[1];
+      const message = parsedBody.split("=")[0];
       fs.writeFile("message.text", message, (err) => {
         if (err) {
           console.log(err);
@@ -34,8 +34,7 @@ const requestHeadler = (req, res) => {
         res.statusCode = 302;
         res.setHeader("Location", "/");
         return res.end();
-      });
-    });
+      });;
   } else {
     res.setHeader("Content-Type", "text/html");
     res.write("<html>");
@@ -46,7 +45,7 @@ const requestHeadler = (req, res) => {
   }
 };
 
-// module.exports = requestHeadler;
+module.exports = requestHeadler;
 
 // module.exports = {
 //  handler: requestHandler,
@@ -56,6 +55,5 @@ const requestHeadler = (req, res) => {
 // module.exports.handler = requestHandler;
 // module.exports.handler = 'Code is Running';
 
-
-exports.handler = requestHandler;
-exports.handler =  'Code is Running';
+// exports.handler = requestHandler;
+// exports.handler =  'Code is Running';
